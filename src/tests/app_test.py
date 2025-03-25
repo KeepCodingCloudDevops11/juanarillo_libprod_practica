@@ -36,3 +36,17 @@ class TestSimpleServer:
 
         assert response.status_code == 200
         assert response.json() == {"msg": "Bye Bye"}
+
+    @pytest.mark.asyncio
+    async def info_test(self):
+        """Tests the info endpoint"""
+        response = client.get("info")
+
+        assert response.status_code == 200
+        data = response.json()
+
+        assert data["app_name"] == "Práctica de Juan Arillo"
+        assert data["version"] == "1.0.0"
+        assert "server_time" in data
+        assert "total_requests" in data
+        assert isinstance(data["total_requests"], float)

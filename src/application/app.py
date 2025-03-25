@@ -2,6 +2,7 @@
 Module define fastapi server configuration
 """
 
+from datetime import datetime, timezone
 from fastapi import FastAPI
 from hypercorn.asyncio import serve
 from hypercorn.config import Config as HyperCornConfig
@@ -52,3 +53,15 @@ class SimpleServer:
     async def bye():
         """Implement bye endpoint"""
         return {"msg": "Bye Bye"}
+    
+    @app.get("/info")
+    async def info():
+        """Return basic information about the application"""
+        REQUESTS.inc()
+        
+        return {
+            "app_name": "Práctica de Juan Arillo",
+            "version": "1.0.0",
+            "server_time": datetime.now(timezone.utc).isoformat(),
+            "total_requests": REQUESTS._value.get()
+        }

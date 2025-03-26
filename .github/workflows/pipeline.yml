@@ -35,9 +35,6 @@ jobs:
           restore-keys: |
             v1-dependencies-
 
-      - name: Upgrade pip
-        run: pip3 install --upgrade pip
-
       - name: Install dependencies (if not cached)
         if: steps.cache-deps.outputs.cache-hit != 'true'
         run: |

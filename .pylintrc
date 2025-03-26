@@ -9,11 +9,12 @@ disable=
     import-error,  # Avoids import errors if the environment is not fully configured
     too-few-public-methods,  # Allows classes with few functions
     logging-fstring-interpolation,  # Allows using f-strings in logs
-    invalid-name  # Does not enforce variable names in specific formats
+    invalid-name,  # Does not enforce variable names in specific formats
+    protected-access  # Allows accessing protected members of a class
 
 [FORMAT]
 # Maximum line length (adjust according to your preferences)
-max-line-length=100
+max-line-length=120
 
 # Spaces required for indentation
 indent-string='    '

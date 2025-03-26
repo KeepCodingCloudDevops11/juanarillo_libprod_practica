@@ -32,7 +32,7 @@ class SimpleServer:
         await serve(app, self._hypercorn_config)
 
     @app.get("/health")
-    async def health_check(self):
+    async def health_check():
         """Implement health check endpoint"""
         # Increment counter used for register the total number of calls in the webserver
         REQUESTS.inc()
@@ -41,7 +41,7 @@ class SimpleServer:
         return {"health": "ok"}
 
     @app.get("/")
-    async def read_main(self):
+    async def read_main():
         """Implement main endpoint"""
         # Increment counter used for register the total number of calls in the webserver
         REQUESTS.inc()
@@ -50,12 +50,12 @@ class SimpleServer:
         return {"msg": "Hello World"}
 
     @app.get("/bye")
-    async def bye(self):
+    async def bye():
         """Implement bye endpoint"""
         return {"msg": "Bye Bye"}
 
     @app.get("/info")
-    async def info(self):
+    async def info():
         """Return basic information about the application"""
         REQUESTS.inc()
 

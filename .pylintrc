@@ -10,8 +10,8 @@ disable=
     too-few-public-methods,  # Allows classes with few functions
     logging-fstring-interpolation,  # Allows using f-strings in logs
     invalid-name,  # Does not enforce variable names in specific formats
-    protected-access  # Allows accessing protected members of a class
-
+    protected-access,  # Allows accessing protected members of a class
+    no-method-argument  # Allows methods without arguments
 [FORMAT]
 # Maximum line length (adjust according to your preferences)
 max-line-length=120

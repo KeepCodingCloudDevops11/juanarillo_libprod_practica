@@ -1,0 +1,5 @@
+{
+  "ci": true,
+  "branches": ["main"],
+  "repositoryUrl": "https://github.com/KeepCodingCloudDevops11/juanarillo_libprod_practica.git"
+}

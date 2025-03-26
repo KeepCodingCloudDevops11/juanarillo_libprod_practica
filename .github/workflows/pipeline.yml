@@ -120,7 +120,7 @@ jobs:
 
       - name: Configure git to use PAT
         run: |
-          git remote set-url origin https://<token>@github.com/KeepCodingCloudDevops11/juanarillo_libprod_practica.git
+          git remote set-url origin https://${{ secrets.LIBPROD_TOKEN }}@github.com/KeepCodingCloudDevops11/juanarillo_libprod_practica.git
         env:
           token: ${{ secrets.LIBPROD_TOKEN }}
 

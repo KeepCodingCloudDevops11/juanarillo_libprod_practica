@@ -110,36 +110,34 @@ jobs:
         with:
             fetch-depth: 0
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-            python-version: ${{ env.PYTHON_VERSION }}
+            node-version: 20
 
-      - name: Install semantic release
-        run: pip install python-semantic-release
+      - name: Install dependencies
+        run: npm ci
 
       - name: Configure Git user
         run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
+            git config user.name "github-actions"
+            git config user.email "github-actions@github.com"
 
-      - name: Configure git to use PAT
+      - name: Ensure CHANGELOG.md exists
+        run: |
+            touch CHANGELOG.md
+            git add CHANGELOG.md
+            git commit -m "chore: add empty CHANGELOG.md" || echo "No changes to commit"
+
+      - name: Run semantic-release and capture version
+        id: semantic
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git remote set-url origin https://${GH_TOKEN}@github.com/KeepCodingCloudDevops11/juanarillo_libprod_practica.git
-
-      - name: Run semantic release
-        env:
-            GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: |
-            semantic-release version
-            semantic-release publish
-
-      - name: Export version to file
-        run: |
-            semantic-release print-version > version.txt
-
+            VERSION=$(npx semantic-release | tee /dev/stderr | grep -oP 'Published release \K[0-9]+\.[0-9]+\.[0-9]+')
+            echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+            echo "$VERSION" > version.txt
+      
       - name: Upload version artifact
         uses: actions/upload-artifact@v4
         with:

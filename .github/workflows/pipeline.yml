@@ -120,7 +120,7 @@ jobs:
 
       - name: Run semantic release
         env:
-            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            GH_TOKEN: ${{ secrets.LIBPROD_TOKEN }}
         run: |
             semantic-release version
             semantic-release publish
